@@ -46,7 +46,7 @@ var Input_class = React.createClass({
             dataType: "json",
             success: function(data){
                 this.setState({nameResponse: data.name});
-                //this.setState({passwordResponse: data.password});
+                this.setState({passwordResponse: data.password});
             }.bind(this),
             failure: function(errMsg) {
                 alert(errMsg);

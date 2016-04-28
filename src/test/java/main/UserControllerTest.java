@@ -34,4 +34,20 @@ public class UserControllerTest extends SpringBasicsApplicationTests {
                 .webAppContextSetup(context).
                         build();
     }
+
+    @Test
+    public void postShouldBeOk() throws Exception{
+        mvc.perform(post("/user").param("name", "David").param("password", "12345")).andExpect(status().isOk());
+    }
+
+    @Test
+    public void postShouldUpdateUser() throws Exception {
+        mvc.perform(post("/userJSON").contentType(MediaType.APPLICATION_JSON).content(json_test_string))
+                .andExpect(status().isOk());
+
+        String result = mvc.perform(get("/user")).andExpect(status().isOk()).andReturn().getResponse()
+                .getContentAsString();
+
+        assertEquals(json_test_string, result);
+    }
 }
